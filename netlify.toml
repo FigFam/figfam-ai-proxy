@@ -1,2 +1,16 @@
+# This is a build setting that can remain
 [functions]
   directory = "netlify/functions"
+
+# This is the new, critical part for fixing the CORS error
+[[headers]]
+  # The path to your serverless function
+  for = "/.netlify/functions/gemini-proxy"
+  
+  [headers.values]
+    # This header allows your ClickFunnels page (or any site) to access the function
+    Access-Control-Allow-Origin = "*"
+    # This header specifies which methods are allowed
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    # This header specifies which headers are allowed in the request
+    Access-Control-Allow-Headers = "Content-Type"
